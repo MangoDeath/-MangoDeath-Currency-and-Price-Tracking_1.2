@@ -27,7 +27,7 @@ class MainApp:
         self.portfolio = Portfolio(username)
         self.portfolio.load()   # Auto-load saved data on startup
 
-        self.root.title(f"🪙 Crypto Tracker — {username}")
+        self.root.title(f" Crypto Tracker — {username}")
         self.root.geometry("960x580")
         self.root.minsize(780, 480)
 
@@ -45,15 +45,15 @@ class MainApp:
     def _build_header(self):
         bar = ttk.Frame(self.root, padding=(12, 8))
         bar.pack(fill="x")
-        ttk.Label(bar, text="🪙 Crypto Portfolio Tracker",
+        ttk.Label(bar, text=" Crypto Portfolio Tracker",
                   font=("Helvetica", 16, "bold")).pack(side="left")
-        ttk.Label(bar, text=f"👤  {self.username}",
+        ttk.Label(bar, text=f"  {self.username}",
                   font=("Helvetica", 10), foreground="#555").pack(side="right")
 
     def _build_search(self):
         row = ttk.Frame(self.root, padding=(12, 2))
         row.pack(fill="x")
-        ttk.Label(row, text="🔍 Search:").pack(side="left")
+        ttk.Label(row, text="Search:").pack(side="left")
         self.search_var = tk.StringVar()
         self.search_var.trace("w", lambda *_: self._on_search())
         ttk.Entry(row, textvariable=self.search_var, width=32).pack(side="left", padx=6)
@@ -165,11 +165,11 @@ class MainApp:
     def _open_add_dialog(self):
         dlg = tk.Toplevel(self.root)
         dlg.title("Add New Asset")
-        dlg.geometry("340x310")
+        dlg.geometry("340x350")
         dlg.resizable(False, False)
         dlg.grab_set()
 
-        frame = ttk.Frame(dlg, padding=22)
+        frame = ttk.Frame(dlg, padding=33)
         frame.pack(fill="both", expand=True)
 
         supported = ", ".join(get_supported_symbols()[:10]) + " …"

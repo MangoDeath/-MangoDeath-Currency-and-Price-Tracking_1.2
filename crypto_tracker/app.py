@@ -1,10 +1,3 @@
-"""
-app.py
-------
-Main Tkinter dashboard for the Crypto Portfolio Tracker.
-Displays a live-updatable asset table with full CRUD, search,
-live price fetching, charts, and JSON persistence.
-"""
 
 import tkinter as tk
 from tkinter import ttk, messagebox
@@ -14,9 +7,9 @@ from api import fetch_prices, get_supported_symbols, COINGECKO_IDS
 from charts import show_pie_chart, show_bar_chart
 
 
-# ── Main App ──────────────────────────────────────────────────────────────────
+
 class MainApp:
-    """Main dashboard window shown after login."""
+   
 
     TABLE_COLS = ("Name", "Symbol", "Quantity", "Price (USD)", "Value (USD)", "Added")
     COL_WIDTHS = (160, 75, 90, 120, 120, 95)
@@ -25,7 +18,7 @@ class MainApp:
         self.root = root
         self.username = username
         self.portfolio = Portfolio(username)
-        self.portfolio.load()   # Auto-load saved data on startup
+        self.portfolio.load()   
 
         self.root.title(f" Crypto Tracker — {username}")
         self.root.geometry("960x580")
@@ -34,7 +27,7 @@ class MainApp:
         self._build_ui()
         self._refresh_table()
 
-    # ── UI construction ────────────────────────────────────────────────────────
+    #    UI 
     def _build_ui(self):
         self._build_header()
         self._build_search()
@@ -74,7 +67,7 @@ class MainApp:
         self.tree.pack(side="left", fill="both", expand=True)
         vsb.pack(side="right", fill="y")
 
-        # Alternating row colors
+        # alternating row colors
         self.tree.tag_configure("odd",  background="#f5f5f5")
         self.tree.tag_configure("even", background="#ffffff")
 
@@ -93,20 +86,20 @@ class MainApp:
         bar.pack(fill="x")
 
         actions = [
-            ("➕ Add Asset",          self._open_add_dialog),
-            ("➖ Remove Asset",       self._remove_selected),
-            ("✏️  Update Price",       self._open_update_dialog),
-            ("🌐 Fetch Live Prices",  self._fetch_live_prices),
-            ("🥧 Pie Chart",          lambda: show_pie_chart(self.portfolio.assets, self.root)),
-            ("📊 Bar Chart",          lambda: show_bar_chart(self.portfolio.assets, self.root)),
-            ("💾 Save",               self._save),
-            ("📂 Load",               self._load),
+            (" Add Asset",self._open_add_dialog),
+            (" Remove Asset", self._remove_selected),
+            (" Update Price",   self._open_update_dialog),
+            (" Fetch Live Prices", self._fetch_live_prices),
+            (" Pie Chart",lambda: show_pie_chart(self.portfolio.assets, self.root)),
+            (" Bar Chart",lambda: show_bar_chart(self.portfolio.assets, self.root)),
+            (" Save",self._save),
+            (" Load",self._load),
         ]
 
         for label, cmd in actions:
             ttk.Button(bar, text=label, command=cmd).pack(side="left", padx=3)
 
-    # ── Table helpers ──────────────────────────────────────────────────────────
+                    #table helpers 
     def _refresh_table(self, assets=None):
         self.tree.delete(*self.tree.get_children())
         display = assets if assets is not None else self.portfolio.assets
@@ -128,7 +121,7 @@ class MainApp:
         self._set_status(f"{count} asset(s)")
 
     def _sort_by(self, col: str):
-        """Sort table by column header click."""
+        
         idx = self.TABLE_COLS.index(col)
         reverse = getattr(self, "_last_sort", None) == col
         self._last_sort = None if reverse else col
@@ -229,7 +222,7 @@ class MainApp:
         ttk.Button(frame, text="Add to Portfolio", command=_submit).pack(pady=4)
         dlg.bind("<Return>", lambda _: _submit())
 
-    # ── Remove selected asset ──────────────────────────────────────────────────
+    # remove asset 
     def _remove_selected(self):
         symbol = self._get_selected_symbol()
         if symbol is None:
@@ -245,7 +238,7 @@ class MainApp:
         else:
             messagebox.showerror("Error", msg)
 
-    # ── Dialog: Update Price ───────────────────────────────────────────────────
+    # Update Price 
     def _open_update_dialog(self):
         symbol = self._get_selected_symbol()
         if symbol is None:
@@ -284,7 +277,7 @@ class MainApp:
         ttk.Button(frame, text="Update", command=_submit).pack()
         dlg.bind("<Return>", lambda _: _submit())
 
-    # ── Fetch live prices ──────────────────────────────────────────────────────
+    # fetch prices 
     def _fetch_live_prices(self):
         symbols = [a.symbol for a in self.portfolio.assets]
         if not symbols:
@@ -322,7 +315,7 @@ class MainApp:
                                 "None of your symbols matched CoinGecko.\n"
                                 "Use standard tickers (BTC, ETH, SOL …)." + hint)
 
-    # ── Save / Load ────────────────────────────────────────────────────────────
+    # Save Load
     def _save(self):
         try:
             self.portfolio.save()

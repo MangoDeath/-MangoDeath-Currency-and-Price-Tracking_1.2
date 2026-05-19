@@ -1,9 +1,4 @@
-"""
-main.py
--------
-Entry point for the Crypto Portfolio Tracker.
-Run with:  python main.py
-"""
+
 
 import tkinter as tk
 from auth import LoginWindow

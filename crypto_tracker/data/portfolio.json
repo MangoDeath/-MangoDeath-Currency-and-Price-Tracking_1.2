@@ -1,0 +1,18 @@
+{
+    "smoketest": [
+        {
+            "name": "Bitcoin",
+            "symbol": "BTC",
+            "quantity": 0.5,
+            "price": 67000.0,
+            "added_date": "2026-05-19"
+        },
+        {
+            "name": "Ethereum",
+            "symbol": "ETH",
+            "quantity": 2.0,
+            "price": 3500.0,
+            "added_date": "2026-05-19"
+        }
+    ]
+}

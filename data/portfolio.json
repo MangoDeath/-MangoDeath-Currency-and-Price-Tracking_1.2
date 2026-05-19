@@ -1,0 +1,11 @@
+{
+    "nako": [
+        {
+            "name": "btc",
+            "symbol": "BTC",
+            "quantity": 0.3,
+            "price": 76717.0,
+            "added_date": "2026-05-19"
+        }
+    ]
+}

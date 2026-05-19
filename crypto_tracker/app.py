@@ -165,7 +165,7 @@ class MainApp:
         frame = ttk.Frame(dlg, padding=33)
         frame.pack(fill="both", expand=True)
 
-        supported = ", ".join(get_supported_symbols()[:10]) + " …"
+        supported = ", ".join(get_supported_symbols()[:20])
         ttk.Label(frame, text=f"Supported for live prices: {supported}",
                   font=("Helvetica", 8), foreground="gray",
                   wraplength=290).pack(anchor="w", pady=(0, 12))
